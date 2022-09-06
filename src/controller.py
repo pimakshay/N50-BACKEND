@@ -34,3 +34,19 @@ class DataHandler:
                         main_df = main_df.join(df)
 
         return main_df
+
+
+class Model:
+
+    def __init__(self) -> None:
+          pass
+
+    def classify(current, future):
+        '''
+            :TODO: change the buying/selling strategy, 
+                buy if future > x * current! x>1.0 (ex: aleast 10percent higher, then x=1.1) 
+        '''
+        if float(future) > float(current):
+            return 1 #sell
+        else:
+            return 0 #buy

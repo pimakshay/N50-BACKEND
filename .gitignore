@@ -1,0 +1,9 @@
+*.pyc
+*.idea
+.vscode/*
+_archiv/*
+.DS_store
+*.ipa
+*.log
+*.zip
+
