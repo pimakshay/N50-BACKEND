@@ -1,5 +1,7 @@
 import pandas as pd
 import os
+from sklearn import preprocessing
+from collections import deque
 
 class DataHandler:
 
@@ -34,6 +36,32 @@ class DataHandler:
                         main_df = main_df.join(df)
 
         return main_df
+
+    def preprocess_df(df, SEQ_LEN):
+        #task 1: scaling
+        df = df.drop('future', 1)
+
+        for col in df.columns:
+            if col != "target":
+                df[col] = df[col].pct_change() # Percentage change between the current and a prior element.
+                df.dropna(inplace=True)
+                
+                # try:
+                #     df[col] = preprocessing.scale(df[col].values) #scaling the data to 0 to 1
+                # except ValueError:
+                #     print("column name: ", col)
+                df[col] = preprocessing.scale(df[col].values)
+        df.dropna(inplace=True)
+        sequential_data = []
+
+        prev_days = deque(maxlen=SEQ_LEN)     
+
+        print(df.head())
+
+        for c in df.columns:
+            print(c)
+        # for i in df.values():
+        #     pass
 
 
 class Model:
